@@ -2,10 +2,29 @@
 <html>
 <head>
   <title>IntraChat</title>
+  <!-- Add script for favicon -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
   <h1>test</h1>
+  
+  <button id="incognitoBtn">Incognito mode</button>
+  
   <p>test2</p>
+  <script>
+    const incognitoBtn = document.getElementById("incognitoBtn");
+    let incognitoMode = 0;
+    incognitoBtn.addEventListener("click", () => {
+      if (incognitoMode === 0){
+        incognitoMode = 1;
+        document.title = "Home"
+        //add script to change favicon to g-class
+      } else {
+        incognitoMode = 0;
+        document.title = "IntraChat"
+        //add script to change favicon to intrachat logo
+      }
+    });
+  </script>
 </body>
 </html>
