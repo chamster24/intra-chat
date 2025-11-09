@@ -19,7 +19,7 @@
     <br>
     <input type="text" id="roomCode" maxlength="10" placeholder="Enter your room code">
     <p style="text-align: center;"><br><i>Room Code should only contain letters and numbers.
-    <br>Your Room Code is NOT case sensitive. That means "ABCD" and "abcd" will lead you to the same room.</i></h4>
+    <br>Your Room Code is NOT case sensitive. That means "ABCD" and "abcd" will lead you to the same room.</i></p>
     <br><br>
     <label>
       <input type="checkbox" id="over13Chb" value="1"> I agree that I'm over 13.
@@ -29,7 +29,7 @@
       <input type="checkbox" id="PPandTOUchb" value="1">I accept the <a href="web/termsofuse.html" target="_blank" rel="noopener noreferrer">terms of use</a> and privacy policy. <!-- add privacy policy -->
     </label>
     <br><br>
-    <button id="incognitoBtn">Incognito Mode</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="loginBtn">Join Room</button>
+    <button id="incognitoBtn">❌ Incognito Mode</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="loginBtn">Join Room</button>
   </div>
 
   <!-- Chat Page -->
@@ -97,7 +97,7 @@
         chatPage.style.display = "block";
         loginStatus = 1;
         if (incognitoMode != 1){
-          document.title = "IntrAChat - " + roomCode;
+          document.title = "IntrAChat - " + roomCodeConfirmed;
         }
         const usernameConfirmed = username.value;
         const roomCodeConfirmed = roomCode.value.toLowerCase();
