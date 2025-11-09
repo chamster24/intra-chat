@@ -96,11 +96,11 @@
         loginPage.style.display = "none";
         chatPage.style.display = "block";
         loginStatus = 1;
+        const usernameConfirmed = username.value;
+        const roomCodeConfirmed = roomCode.value.toLowerCase();
         if (incognitoMode != 1){
           document.title = "IntrAChat - " + roomCodeConfirmed;
         }
-        const usernameConfirmed = username.value;
-        const roomCodeConfirmed = roomCode.value.toLowerCase();
         chatPageInfo.innerHTML = "IntrAChat - <i>" + usernameConfirmed + "</i> - Room " + roomCodeConfirmed;
       }
     });
