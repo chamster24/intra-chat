@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>IntraChat</title>
+  <title>IntrAChat</title>
   <!-- Add script for favicon -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -9,7 +9,8 @@
 
   <!-- Login Page -->
   <div id="loginPage" style="display: flex; height: 100vh; flex-direction: column; justify-content: center; align-items: center;">
-    <h1>Intra Chat</h1>
+    <h1>IntrAChat</h1>
+    <p><br>Absolute anarchy, no moderation.</p>
     <br>
     <h2>Login</h2>
     <input type="text" id="username" maxlength="16" placeholder="Enter your username (any username works!)">
@@ -19,6 +20,14 @@
     <input type="text" id="roomCode" maxlength="10" placeholder="Enter your room code">
     <p style="text-align: center;"><br><i>Room Code should only contain letters and numbers.
     <br>Your Room Code is NOT case sensitive. That means "ABCD" and "abcd" will lead you to the same room.</i></h4>
+    <br><br>
+    <label>
+      <input type="checkbox" id="over13Chb" value="1"> I agree that I'm over 13.
+    </label>
+    <br>
+    <label>
+      <input type="checkbox" id="PPandTOUchb" value="1">I accept the <a href="web/termsofuse.html" target="_blank" rel="noopener noreferrer">terms of use</a> and privacy policy. <!-- add privacy policy -->
+    </label>
     <br><br>
     <button id="incognitoBtn">Incognito Mode</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="loginBtn">Join Room</button>
   </div>
@@ -59,7 +68,7 @@
         //add script to change favicon to g-class
       } else {
         incognitoMode = 0;
-        document.title = "IntraChat"
+        document.title = "IntrAChat"
         incognitoBtn.textContent = "❌ Incognito Mode"
         //add script to change favicon to intrachat logo
       }
@@ -68,25 +77,31 @@
     //Login script
     loginBtn.addEventListener("click", () => {
       const usernameCheck = /^[a-zA-Z0-9_-]+$/;
-      const roomCodeCheck = /^[a-zA-Z0-9]+$/
+      const roomCodeCheck = /^[a-zA-Z0-9]+$/;
+      const over13Chb = document.getItemById("over13Chb");
+      const touChb = document.getItemById("PPandTOUchb");
       if (username.value === "" || roomCode.value === ""){
         alert("Please fill in both fields to login!");
       } else if (username.value.length > 16 || roomCode.value.length > 10){
-        alert("Username must be 16 characters or fewer and Room Code must be 10 characters or fewer!")
+        alert("Username must be 16 characters or fewer and Room Code must be 10 characters or fewer!");
       } else if (!usernameCheck.test(username.value)) {
-        alert("Username can only contain letters, numbers, underscores (_) and hyphens (-). No spaces!")
+        alert("Username can only contain letters, numbers, underscores (_) and hyphens (-). No spaces!");
       } else if (!roomCodeCheck.test(roomCode.value)) {
-        alert("Room Code can only contain letters and numbers. No spaces!")
+        alert("Room Code can only contain letters and numbers. No spaces!");
+      } else if (!over13Chb.checked) {
+        alert("You must agree that you are over 13 to use this service.");
+      } else if (!touChb.checked) {
+        alert("You must agree to the Terms of Use and Privacy Policy to use this service.")
       } else {
         loginPage.style.display = "none";
         chatPage.style.display = "block";
         loginStatus = 1;
         if (incognitoMode != 1){
-          document.title = "Intrachat - " + roomCode;
+          document.title = "IntrAChat - " + roomCode;
         }
         const usernameConfirmed = username.value;
         const roomCodeConfirmed = roomCode.value.toLowerCase();
-        chatPageInfo.innerHTML = "IntraChat - <i>" + usernameConfirmed + "</i> - Room " + roomCodeConfirmed;
+        chatPageInfo.innerHTML = "IntrAChat - <i>" + usernameConfirmed + "</i> - Room " + roomCodeConfirmed;
       }
     });
 
