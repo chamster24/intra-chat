@@ -64,11 +64,11 @@
     //Login script
     loginBtn.addEventListener("click", () => {
       const usernameCheck = /^[a-zA-Z0-9_-]+$/;
-      if (username.value.trim() !== "" || roomCode.value.trim() !== ""){
+      if (username.value.trim() === "" || roomCode.value.trim() === ""){
         alert("Please fill in both fields to login!");
       } else if (username.value.length > 16 || roomCode.value.length > 10){
         alert("Username must be 16 characters or fewer and Room Code must be 10 characters or fewer!")
-      } else if (!usernameCheck.test(username.value) {
+      } else if (!usernameCheck.test(username.value)) {
         alert("Username can only contain letters, numbers, underscores (_) and hyphens (-)!")
       } else {
         loginPage.style.display = "none";
