@@ -21,7 +21,7 @@
 
   <!-- Chat Page -->
   <div id="chatPage" style="display:none;">
-    <h1>You logged in!</h1>
+    <h2 id="chatPageInfo">if you are seeing this something went wrong.</h2>
   </div>
   
   <script>
@@ -29,6 +29,7 @@
     const loginBtn = document.getElementById("loginBtn");
     const loginPage = document.getElementById("loginPage");
     const chatPage = document.getElementById("chatPage");
+    const chatPageInfo = document.getElementById("chatPageInfo");
     const username = document.getElementById("username");
     const roomCode = document.getElementById("roomCode");
     const savedUsername = localStorage.getItem("username");
@@ -66,6 +67,8 @@
         chatPage.style.display = "block";
         if (incognitoMode != 1){
           document.title = "Intrachat - " + roomCode;
+
+          chatPageInfo.textContent = "IntraChat - " + username.value + " - Room " + roomCode.value;
         }
         
       } else {
