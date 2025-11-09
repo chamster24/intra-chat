@@ -36,7 +36,7 @@
     const savedUsername = localStorage.getItem("username");
     const savedRoomCode = localStorage.getItem("roomCode");
     let incognitoMode = 0;
-    let loginstatus = 0;
+    let loginStatus = 0;
 
     //setup
     if (savedUsername){ //fills field in with saved username
@@ -69,10 +69,8 @@
         loginStatus = 1;
         if (incognitoMode != 1){
           document.title = "Intrachat - " + roomCode;
-
-          chatPageInfo.innerHTML = "IntraChat - <i>" + username.value + "</i> - Room " + roomCode.value;
         }
-        
+        chatPageInfo.innerHTML = "IntraChat - <i>" + username.value + "</i> - Room " + roomCode.value;
       } else {
         alert("Please fill in both fields to login!")
       }
