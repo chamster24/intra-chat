@@ -29,11 +29,23 @@
     const loginBtn = document.getElementById("loginBtn");
     const loginPage = document.getElementById("loginPage");
     const chatPage = document.getElementById("chatPage");
+    const username = document.getElementById("username");
+    const roomCode = document.getElementById("roomCode");
+    const savedUsername = localStorage.getItem("username");
+    const savedRoomCode = localStorage.getItem("roomCode");
     let incognitoMode = 0;
     let loginstatus = 0;
 
+    //setup
+    if (savedUsername){ //fills field in with saved username
+      username.value = savedUsername;
+    }
+    if (savedRoomCode){ //fills field in with saved room code
+      roomCode.value = savedRoomCode;
+    }
+    
     //Incognito check
-    incognitoBtn.addEventListener("click", () => {
+    incognitoBtn.addEventListener("click", () => { //maybe add icognito mode toggle localstorage?
       if (incognitoMode === 0){
         incognitoMode = 1;
         document.title = "Home"
@@ -49,10 +61,7 @@
 
     //Login script
     loginBtn.addEventListener("click", () => {
-      const username = document.getElementById("username").value.trim();
-      const roomCode = document.getElementById("roomCode").value.trim();
-
-      if (username !== "" && roomCode !== ""){
+      if (username.value.trim() !== "" && roomCode.value.trim() !== ""){
         loginPage.style.display = "none";
         chatPage.style.display = "block";
         if (incognitoMode != 1){
@@ -62,6 +71,14 @@
       } else {
         alert("Please fill in both fields to login!")
       }
+    });
+
+    //save info for username and room code fields
+    username.addEventListener("input", () => {
+      localStorage.setItem("username", username.value);
+    });
+    roomCode.addEventListener("input", () => {
+      localStorage.setItem("roomCode", roomCode.value);
     });
     
   </script>
