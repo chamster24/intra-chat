@@ -14,9 +14,9 @@
     <h2>Login</h2>
     <input type="text" id="username" placeholder="Enter your username (any username works!)">
     <br>
-    <input type="text" id="roomCode" placeholder="Enter your room code">
+    <input type="text" id="roomCode" placeholder="Enter your room code (case sensitive)">
     <br>
-    <button id="incognitoBtn">Incognito mode</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="loginBtn">Login</button>
+    <button id="incognitoBtn">Incognito Mode</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="loginBtn">Join Room</button>
   </div>
 
   <!-- Chat Page -->
@@ -26,18 +26,44 @@
   
   <script>
     const incognitoBtn = document.getElementById("incognitoBtn");
+    const loginBtn = document.getElementById("loginBtn");
+    const loginPage = document.getElementById("loginPage");
+    const chatPage = document.getElementById("chatPage");
     let incognitoMode = 0;
+    let loginstatus = 0;
+
+    //Incognito check
     incognitoBtn.addEventListener("click", () => {
       if (incognitoMode === 0){
         incognitoMode = 1;
         document.title = "Home"
+        incognitoBtn.textContent = "✅ Incognito Mode"
         //add script to change favicon to g-class
       } else {
         incognitoMode = 0;
         document.title = "IntraChat"
+        incognitoBtn.textContent = "❌ Incognito Mode"
         //add script to change favicon to intrachat logo
       }
     });
+
+    //Login script
+    loginBtn.addEventListener("click", () => {
+      const username = document.getElementById("username").value.trim();
+      const roomCode = document.getElementById("roomCode").value.trim();
+
+      if (username !== "" && roomCode !== ""){
+        loginPage.style.display = "none";
+        chatPage.style.display = "block";
+        if (incognitoMode != 1){
+          document.title = "Intrachat - " + roomCode;
+        }
+        
+      } else {
+        alert("Please fill in both fields to login!")
+      }
+    });
+    
   </script>
 </body>
 </html>
