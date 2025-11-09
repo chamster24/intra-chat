@@ -26,7 +26,7 @@
     </label>
     <br>
     <label>
-      <input type="checkbox" id="PPandTOUchb" value="1">I accept the <a href="web/termsofuse.html" target="_blank" rel="noopener noreferrer">terms of use</a> and privacy policy. <!-- add privacy policy -->
+      <input type="checkbox" id="PPandTOUchb" value="1">I accept the <a href="termsofuse.html" target="_blank" rel="noopener noreferrer">terms of use</a> and privacy policy. <!-- add privacy policy -->
     </label>
     <br><br>
     <button id="incognitoBtn">❌ Incognito Mode</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="loginBtn">Join Room</button>
@@ -119,7 +119,179 @@
         if (incognitoMode != 1){
           document.title = "IntrAChat - " + roomCodeConfirmed;
         }
-        socket = new WebSocket("wss://0def8ba5-e0f5-4e30-ba47-e49f5b3cfd9b-00-2lzf3jbq9mudl.riker.replit.dev"); //connect to websocket
+        socket = new WebSocket("`wss://intra-chat.onrender.com/ws/${roomCodeConfirmed}`"); //connect to websocket
+        socket.addEventListener("open", () => {
+          console.log("Connected to server!");
+          
+          // Tell the server which room & username
+          socket.send(JSON.stringify({
+          type: "join",
+          username: usernameConfirmed,
+          room: roomCodeConfirmed
+        })); //WORK ON THIS PART
+        });
+
+        chatPageInfo.innerHTML = "IntrAChat - <i>" + usernameConfirmed + "</i> - Room " + roomCodeConfirmed; //to del
+      
+    });
+    
+    //send msg fct
+    function sendMsg() {
+      let msgObj = {}
+      msgObj["type"] = "message"
+      msgObj["user"] = usernameConfirmed;
+      msgObj["msg"] = chatInput.value.trim();
+      msgObj["timestamp"] = new Date().toISOString();
+      msgObj["room"] = roomCodeConfirmed;
+      socket.send(JSON.stringify(msgObj));
+      console.log(JSON.stringify(msgObj));
+      chatInput.value = ""
+    }
+    
+    //chatbox fct
+    chatInput.addEventListener("keydown", (keyPressed) => {
+      if (keyPressed.key === "Enter") {
+        if (keyPressed.shiftKey) {
+          //shift + enter for newline
+          const start = chatInput.selectionStart;
+          const end = chatInput.selectionEnd;
+          chatInput.value = chatInput.value.substring(0, start) + "\n" + chatInput.value.substring(end);
+          chatInput.selectionStart = chatInput.selectionEnd = start + 1;
+          keyPressed.preventDefault();
+        } else {
+          //enter to send msg
+          keyPressed.preventDefault();
+          
+          sendMsg()
+        }
+      }
+    });
+    
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>IntrAChat</title>
+  <!-- Add script for favicon -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+  <!-- Login Page -->
+  <div id="loginPage" style="display: flex; height: 100vh; flex-direction: column; justify-content: center; align-items: center;">
+    <h1>IntrAChat</h1>
+    <p><br>Absolute anarchy, no moderation.</p>
+    <br>
+    <h2>Login</h2>
+    <input type="text" id="username" maxlength="16" placeholder="Enter your username (any username works!)">
+    <p style="text-align: center;"><br><i>Username should only contain letters, numbers, underscores(_), and hyphens (-).
+      <br>Your username is NOT linked to any account of any kind, but the same username may not appear in 2 rooms at the same time.</i></p>
+    <br>
+    <input type="text" id="roomCode" maxlength="10" placeholder="Enter your room code">
+    <p style="text-align: center;"><br><i>Room Code should only contain letters and numbers.
+    <br>Your Room Code is NOT case sensitive. That means "ABCD" and "abcd" will lead you to the same room.</i></p>
+    <br><br>
+    <label>
+      <input type="checkbox" id="over13Chb" value="1"> I agree that I'm over 13.
+    </label>
+    <br>
+    <label>
+      <input type="checkbox" id="PPandTOUchb" value="1">I accept the <a href="termsofuse.html" target="_blank" rel="noopener noreferrer">terms of use</a> and privacy policy. <!-- add privacy policy -->
+    </label>
+    <br><br>
+    <button id="incognitoBtn">❌ Incognito Mode</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="loginBtn">Join Room</button>
+  </div>
+
+  <!-- Chat Page -->
+  <div id="chatPage" style="display:none;">
+    <h2 id="chatPageInfo" style="text-align: center;">Connecting to server.</h2>
+    <br>
+    <!-- Message container -->
+    <div id="messages" style="border:1px solid #ccc; height:300px; overflow-y:auto; padding:10px; margin:10px 0;">
+    </div>
+    <br>
+    <input type="text" id="chatInput" placeholder="Type your message here. Enter to send, Shift + Enter for a new line." style="width:70%;">
+  </div>
+
+  <!-- Clientside code -->
+  <script>
+    const incognitoBtn = document.getElementById("incognitoBtn");
+    const loginBtn = document.getElementById("loginBtn");
+    const loginPage = document.getElementById("loginPage");
+    const chatPage = document.getElementById("chatPage");
+    const chatPageInfo = document.getElementById("chatPageInfo");
+    const username = document.getElementById("username");
+    const roomCode = document.getElementById("roomCode");
+    const savedUsername = localStorage.getItem("username");
+    const savedRoomCode = localStorage.getItem("roomCode");
+    const chatInput = document.getElementById("chatInput");
+    let usernameConfirmed;
+    let roomCodeConfirmed;
+    let incognitoMode = 0;
+    let socket;
+    let loginStatus = 0;
+
+    //setup
+    if (savedUsername){ //fills field in with saved username
+      username.value = savedUsername;
+    }
+    if (savedRoomCode){ //fills field in with saved room code
+      roomCode.value = savedRoomCode;
+    }
+    
+    //Incognito check
+    incognitoBtn.addEventListener("click", () => { //maybe add icognito mode toggle localstorage?
+      if (incognitoMode === 0){
+        incognitoMode = 1;
+        document.title = "Home"
+        incognitoBtn.textContent = "✅ Incognito Mode"
+        //add script to change favicon to g-class
+      } else {
+        incognitoMode = 0;
+        document.title = "IntrAChat"
+        incognitoBtn.textContent = "❌ Incognito Mode"
+        //add script to change favicon to intrachat logo
+      }
+    });
+
+    //save info for username and room code fields
+    username.addEventListener("input", () => {
+      localStorage.setItem("username", username.value);
+    });
+    roomCode.addEventListener("input", () => {
+      localStorage.setItem("roomCode", roomCode.value);
+    });
+
+    //Login script
+    loginBtn.addEventListener("click", () => {
+      const usernameCheck = /^[a-zA-Z0-9_-]+$/;
+      const roomCodeCheck = /^[a-zA-Z0-9]+$/;
+      const over13Chb = document.getElementById("over13Chb");
+      const touChb = document.getElementById("PPandTOUchb");
+      if (username.value === "" || roomCode.value === ""){
+        alert("Please fill in both fields to login!");
+      } else if (username.value.length > 16 || roomCode.value.length > 10){
+        alert("Username must be 16 characters or fewer and Room Code must be 10 characters or fewer!");
+      } else if (!usernameCheck.test(username.value)) {
+        alert("Username can only contain letters, numbers, underscores (_) and hyphens (-). No spaces!");
+      } else if (!roomCodeCheck.test(roomCode.value)) {
+        alert("Room Code can only contain letters and numbers. No spaces!");
+      } else if (!over13Chb.checked) {
+        alert("You must agree that you are over 13 to use this service.");
+      } else if (!touChb.checked) {
+        alert("You must agree to the Terms of Use and Privacy Policy to use this service.")
+      } else { //all ok
+        loginPage.style.display = "none";
+        chatPage.style.display = "block";
+        loginStatus = 1;
+        usernameConfirmed = username.value.trim();
+        roomCodeConfirmed = roomCode.value.toLowerCase();
+        if (incognitoMode != 1){
+          document.title = "IntrAChat - " + roomCodeConfirmed;
+        }
+        socket = new WebSocket("`wss://intra-chat.onrender.com/ws/${roomCodeConfirmed}`"); //connect to websocket
         socket.addEventListener("open", () => {
           console.log("Connected to server!");
           
