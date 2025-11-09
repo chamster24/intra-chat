@@ -70,7 +70,7 @@
         if (incognitoMode != 1){
           document.title = "Intrachat - " + roomCode;
 
-          chatPageInfo.textContent = "IntraChat - " + username.value + " - Room " + roomCode.value;
+          chatPageInfo.innerHTML = "IntraChat - <i>" + username.value + "</i> - Room " + roomCode.value;
         }
         
       } else {
