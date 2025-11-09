@@ -6,11 +6,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  <h1>test</h1>
+
+  <!-- Login Page -->
+  <div id="loginPage">
+    <h1>Intra Chat</h1>
+    <br>
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Enter your username (any username works!)">
+    <input type="text" id="username" placeholder="Enter your room code">
+    <button id="incognitoBtn">Incognito mode</button>
+  </div>
+
+  <!-- Chat Page -->
+  <div id="chatPage" sytle="display:none;">
+    <h1>You logged in!</h1>
+  </div>
   
-  <button id="incognitoBtn">Incognito mode</button>
-  
-  <p>test2</p>
   <script>
     const incognitoBtn = document.getElementById("incognitoBtn");
     let incognitoMode = 0;
