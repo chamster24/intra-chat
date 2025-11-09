@@ -78,8 +78,8 @@
     loginBtn.addEventListener("click", () => {
       const usernameCheck = /^[a-zA-Z0-9_-]+$/;
       const roomCodeCheck = /^[a-zA-Z0-9]+$/;
-      const over13Chb = document.getItemById("over13Chb");
-      const touChb = document.getItemById("PPandTOUchb");
+      const over13Chb = document.getElementById("over13Chb");
+      const touChb = document.getElementById("PPandTOUchb");
       if (username.value === "" || roomCode.value === ""){
         alert("Please fill in both fields to login!");
       } else if (username.value.length > 16 || roomCode.value.length > 10){
