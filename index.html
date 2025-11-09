@@ -64,11 +64,15 @@
     //Login script
     loginBtn.addEventListener("click", () => {
       if (username.value.trim() !== "" && roomCode.value.trim() !== ""){
-        loginPage.style.display = "none";
-        chatPage.style.display = "block";
-        loginStatus = 1;
-        if (incognitoMode != 1){
-          document.title = "Intrachat - " + roomCode;
+        if (username.value.length > 16 || roomCode.value.length > 10){
+          alert("Username must be 16 characters or fewer and Room Code must be 10 characters or fewer!")
+        } else {
+          loginPage.style.display = "none";
+          chatPage.style.display = "block";
+          loginStatus = 1;
+          if (incognitoMode != 1){
+            document.title = "Intrachat - " + roomCode;
+          }
         }
         chatPageInfo.innerHTML = "IntraChat - <i>" + username.value + "</i> - Room " + roomCode.value;
       } else {
