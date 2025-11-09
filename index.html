@@ -8,7 +8,7 @@
 <body>
 
   <!-- Login Page -->
-  <div id="loginPage">
+  <div id="loginPage" style="display: flex; height: 100vh; flex-direction: column; justify-content: center; align-items: center;">
     <h1>Intra Chat</h1>
     <br>
     <h2>Login</h2>
@@ -21,9 +21,10 @@
 
   <!-- Chat Page -->
   <div id="chatPage" style="display:none;">
-    <h2 id="chatPageInfo">if you are seeing this something went wrong.</h2>
+    <h2 id="chatPageInfo" style="text-align: center;">if you are seeing this something went wrong.</h2>
   </div>
-  
+
+  <!-- Clientside code -->
   <script>
     const incognitoBtn = document.getElementById("incognitoBtn");
     const loginBtn = document.getElementById("loginBtn");
@@ -65,6 +66,7 @@
       if (username.value.trim() !== "" && roomCode.value.trim() !== ""){
         loginPage.style.display = "none";
         chatPage.style.display = "block";
+        loginStatus = 1;
         if (incognitoMode != 1){
           document.title = "Intrachat - " + roomCode;
 
