@@ -13,8 +13,12 @@
     <br>
     <h2>Login</h2>
     <input type="text" id="username" maxlength="16" placeholder="Enter your username (any username works!)">
+    <br> <h4>Username should only contain letters, numbers, underscores(_), and hyphens (-).
+      <br>Your username is NOT linked to any account of any kind, but the same username may not appear in 2 rooms at the same time.</h4>
     <br>
-    <input type="text" id="roomCode" maxlength="10" placeholder="Enter your room code (case sensitive)">
+    <input type="text" id="roomCode" maxlength="10" placeholder="Enter your room code">
+    <br> <h4>Room Code should only contain letters and numbers.
+    <br>Your Room Code is NOT case sensitive. That means "ABCD" and "abcd" will lead you to the same room.</h4>
     <br>
     <button id="incognitoBtn">Incognito Mode</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="loginBtn">Join Room</button>
   </div>
@@ -64,12 +68,15 @@
     //Login script
     loginBtn.addEventListener("click", () => {
       const usernameCheck = /^[a-zA-Z0-9_-]+$/;
-      if (username.value.trim() === "" || roomCode.value.trim() === ""){
+      const roomCodeCheck = /^[a-zA-Z0-9]+$/
+      if (username.value === "" || roomCode.value === ""){
         alert("Please fill in both fields to login!");
       } else if (username.value.length > 16 || roomCode.value.length > 10){
         alert("Username must be 16 characters or fewer and Room Code must be 10 characters or fewer!")
       } else if (!usernameCheck.test(username.value)) {
-        alert("Username can only contain letters, numbers, underscores (_) and hyphens (-)!")
+        alert("Username can only contain letters, numbers, underscores (_) and hyphens (-). No spaces!")
+      } else if (!roomCodeCheck.test(roomCode.value)) {
+        alert("Room Code can only contain letters and numbers. No spaces!")
       } else {
         loginPage.style.display = "none";
         chatPage.style.display = "block";
@@ -77,7 +84,9 @@
         if (incognitoMode != 1){
           document.title = "Intrachat - " + roomCode;
         }
-        chatPageInfo.innerHTML = "IntraChat - <i>" + username.value + "</i> - Room " + roomCode.value;
+        const usernameConfirmed = username.value;
+        const roomCodeConfirmed = roomCode.value.toLowerCase();
+        chatPageInfo.innerHTML = "IntraChat - <i>" + usernameConfirmed.value + "</i> - Room " + roomCodeConfirmed.value;
       }
     });
 
