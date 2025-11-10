@@ -49,6 +49,9 @@ async def websocket_endpoint(websocket: WebSocket, room: str):
                 "msg": "An error occured. We're trying to disconnect you from the server...", 
                 "room": str(msg["room"])
             }))
+        except:
+            pass
+
         # remove from temp list
         if websocket in connections:
             connections.remove(websocket)
