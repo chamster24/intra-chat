@@ -128,11 +128,12 @@
           type: "join",
           username: usernameConfirmed,
           room: roomCodeConfirmed
-        })); //WORK ON THIS PART
+        }));
         });
 
-        chatPageInfo.innerHTML = "IntrAChat - <i>" + usernameConfirmed + "</i> - Room " + roomCodeConfirmed; //to del
-      
+        chatPageInfo.innerHTML = "IntrAChat - <i>" + usernameConfirmed + "</i> - Room " + roomCodeConfirmed; //TOEDIT - this needs to be changed to a signal sent from server confirming entered chatroom
+    
+      }  
     });
     
     //send msg fct
