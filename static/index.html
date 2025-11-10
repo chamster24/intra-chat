@@ -37,7 +37,7 @@
     <h2 id="chatPageInfo" style="text-align: center;">Connecting to server.</h2>
     <br>
     <!-- Message container -->
-    <div id="messages" style="border:1px solid #ccc; height:300px; overflow-y:auto; padding:10px; margin:10px 0;">
+    <div id="messageBox" style="border:1px solid #ccc; height:300px; overflow-y:auto; padding:10px; margin:10px 0;">
     </div>
     <br>
     <input type="text" id="chatInput" placeholder="Type your message here. Enter to send, Shift + Enter for a new line." style="width:70%;">
@@ -55,6 +55,7 @@
     const savedUsername = localStorage.getItem("username");
     const savedRoomCode = localStorage.getItem("roomCode");
     const chatInput = document.getElementById("chatInput");
+    const messageBox = document.getElementById("messageBox")
     let usernameConfirmed;
     let roomCodeConfirmed;
     let incognitoMode = 0;
@@ -165,6 +166,17 @@
           
           sendMsg()
         }
+      }
+    });
+
+    funcution displayMessage(user, content, time) {
+      
+    }
+    
+    socket.addEventListener("message", (JSONmsg) => { //Recieving msgs
+      const msg = JSON.parse(JSONmsg.data);
+      if msg.type = "message" {
+      displayMessage(msg.user, msg.message, msg.timestamp);
       }
     });
     
