@@ -30,7 +30,7 @@ async def websocket_endpoint(websocket: WebSocket, room: str):
                         await sock.send_text(json.dumps({
                             "type": "message",
                             "username": "*system",
-                            "msg": "Sorry, but we currently do NOT handle commands.",
+                            "message": "Sorry, but we currently do NOT handle commands.",
                             "room": msg["room"]
                         }))
                 
@@ -46,7 +46,7 @@ async def websocket_endpoint(websocket: WebSocket, room: str):
             await websocket.send_text(json.dumps({
                 "type": "message", 
                 "username": "*system", 
-                "msg": "An error occured. We're trying to disconnect you from the server...", 
+                "message": "An error occured. We're trying to disconnect you from the server...", 
                 "room": str(msg["room"])
             }))
         except:
