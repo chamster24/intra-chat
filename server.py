@@ -17,27 +17,32 @@ async def websocket_endpoint(websocket: WebSocket, room: str):
         while True: #manage messages 
             jsonMsg = await websocket.receive_text()
             msg = json.loads(jsonMsg)
-            if msg["type"] == "message":
-                if not str(msg["message"]).startswith("/"): #handles messages
-                    for sock in rooms.get(msg["room"], {}).values():
-                        await sock.send_text(json.dumps(msg))
-            else: #handles commands
-                for username, sock in rooms.get(msg["room"], {}).items():
-                    if username == msg["username"]:
-                        await sock.send_text(json.dumps({
-                            "type": "message",
-                            "username": "*system",
-                            "message": "Sorry, but we currently do NOT handle commands.",
-                            "room": msg["room"]
-                        }))
-                
+            
             if msg["type"] == "join": #actual join message
                 if not msg["room"] in rooms:
                     rooms[msg["room"]] = {}
                 rooms[msg["room"]][msg["username"]] = websocket
                 if websocket in connections:
-                    connections.remove[websocket]
+                    connections.remove(websocket)
+                    
+            elif msg["type"] == "message":
+                if not str(msg["message"]).startswith("/"): #handles messages
+                    for sock in rooms.get(msg["room"], {}).values():
+                        await sock.send_text(json.dumps(msg))
+                        
+                else: #handles commands
+                    for username, sock in rooms.get(msg["room"], {}).items():
+                        if username == msg["username"]:
+                            await sock.send_text(json.dumps({
+                                "type": "message",
+                                "username": "*system",
+                                "message": "Sorry, but we currently do NOT handle commands.",
+                                "room": msg["room"]
+                            }))
 
+            else: #handles other messages
+                pass
+                
     except (Exception, WebSocketDisconnect):
         try:
             await websocket.send_text(json.dumps({
