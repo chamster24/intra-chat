@@ -123,13 +123,18 @@
         socket = new WebSocket(`wss://intra-chat.onrender.com/ws/${roomCodeConfirmed}`); //connect to websocket
         socket.addEventListener("open", () => {
           console.log("Connected to server!");
-          
           // Tell the server which room & username
           socket.send(JSON.stringify({
           type: "join",
           username: usernameConfirmed,
           room: roomCodeConfirmed
         }));
+        });
+        socket.addEventListener("message", (JSONmsg) => {
+          const msg = JSON.parse(JSONmsg.data);
+          if (msg.type === "message") {
+            displayMessage(msg.user, msg.message, msg.timestamp);
+          }
         });
 
         chatPageInfo.innerHTML = "IntrAChat - <i>" + usernameConfirmed + "</i> - Room " + roomCodeConfirmed; //TOEDIT - this needs to be changed to a signal sent from server confirming entered chatroom
@@ -169,16 +174,14 @@
       }
     });
 
-    funcution displayMessage(user, content, time) {
-      
-    }
+    function displayMessage(user, content, time) {
+      const msgDiv = document.createElement("div");
+      const timestamp = new Date(time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+      msgDiv.innerHTML = `<b>[${timestamp}] ${user}:</b> ${content}`;
+      messageBox.appendChild(msgDiv);
+      messageBox.scrollTop = messageBox.scrollHeight; // auto-scroll to bottom
+}
     
-    socket.addEventListener("message", (JSONmsg) => { //Recieving msgs
-      const msg = JSON.parse(JSONmsg.data);
-      if msg.type = "message" {
-      displayMessage(msg.user, msg.message, msg.timestamp);
-      }
-    });
     
   </script>
 </body>
