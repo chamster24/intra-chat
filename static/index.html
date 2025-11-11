@@ -133,7 +133,7 @@
         socket.addEventListener("message", (JSONmsg) => {
           const msg = JSON.parse(JSONmsg.data);
           if (msg.type === "message") {
-            displayMessage(msg.user, msg.message, msg.timestamp);
+            displayMessage(msg.username, msg.message, msg.timestamp);
           }
         });
 
@@ -146,8 +146,8 @@
     function sendMsg() {
       let msgObj = {}
       msgObj["type"] = "message"
-      msgObj["user"] = usernameConfirmed;
-      msgObj["msg"] = chatInput.value.trim();
+      msgObj["username"] = usernameConfirmed;
+      msgObj["message"] = chatInput.value.trim();
       msgObj["timestamp"] = new Date().toISOString();
       msgObj["room"] = roomCodeConfirmed;
       socket.send(JSON.stringify(msgObj));
