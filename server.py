@@ -5,9 +5,6 @@ import json
 
 app = FastAPI()
 
-# Serve your HTML/JS/CSS
-app.mount("/", StaticFiles(directory="static", html=True), name="static")
-
 # Basic Room Hosting
 connections = [] #temp connections list
 rooms = {}
@@ -90,3 +87,6 @@ async def websocket_endpoint(websocket: WebSocket, room: str):
             await websocket.close()
         except Exception:
             pass
+
+
+app.mount("/", StaticFiles(directory="static", html=True), name="static") #LAST PART FOR SERVING STATIC FILES
