@@ -74,14 +74,23 @@
     incognitoBtn.addEventListener("click", () => { //maybe add icognito mode toggle localstorage?
       if (incognitoMode === 0){
         incognitoMode = 1;
-        document.title = "Home"
+        document.title = "Untitled Document"
         incognitoBtn.textContent = "✅ Incognito Mode"
-        //add script to change favicon to g-class
+
+        const rand = Math.floor(Math.random() * 4) + 1; //Change favicon to a random logo
+        let link = document.querySelector("link[rel~='icon']");
+        if (!link) {
+          link = document.createElement("link");
+          link.rel = "icon";
+          document.head.appendChild(link);
+        }
+        link.href = `/assets/favicon-i${rand}.png`;
+        
       } else {
         incognitoMode = 0;
         document.title = "IntrAChat"
         incognitoBtn.textContent = "❌ Incognito Mode"
-        //add script to change favicon to intrachat logo
+        //add script to change favicon to intrachat logo 
       }
     });
 
