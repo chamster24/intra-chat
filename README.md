@@ -1,5 +1,5 @@
 # IntrAChat
-## V0.9.0
+** V0.9.0 **
 _Absolute Anarchy, No Moderation._
 
 Simple chatting app for talking between people. This app is unique as it doesn't require an account - rather, you enter a room code to talk.
