@@ -2,8 +2,7 @@ from fastapi import FastAPI, WebSocket
 from fastapi.staticfiles import StaticFiles
 from fastapi.websockets import WebSocketDisconnect
 import json
-import datetime
-from datetime import timezone
+from datetime import datetime, timezone
 
 app = FastAPI()
 
