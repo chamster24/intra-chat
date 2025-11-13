@@ -153,6 +153,10 @@
     
     //send msg fct
     function sendMsg() {
+      if chatInput.value.trim() = "" { //Handles empty lines
+        return;
+      }
+      
       let msgObj = {}
       msgObj["type"] = "message"
       msgObj["username"] = usernameConfirmed;
