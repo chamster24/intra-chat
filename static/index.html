@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>IntrAChat</title>
-  <!-- Add script for favicon -->
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -95,7 +95,8 @@
         incognitoMode = 0;
         document.title = "IntrAChat"
         incognitoBtn.textContent = "❌ Incognito Mode"
-        //add script to change favicon to intrachat logo 
+        let link = document.querySelector("link[rel~='icon']");
+        link.href = `/assets/favicon.png`;
       }
     });
 
