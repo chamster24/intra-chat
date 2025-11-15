@@ -170,11 +170,14 @@
       socket.send(JSON.stringify(msgObj));
       console.log(JSON.stringify(msgObj));
       chatInput.value = ""
+
+      charCount.textContent = `0 / 500`; // reset charcount
+      charCount.style.color = "inherit";
     }
     
     //chatbox fct
     chatInput.addEventListener("keydown", (keyPressed) => {
-      if (keyPressed.key === "Enter") { //disabled newlines
+      if (keyPressed.key === "Enter") { // disabled newlines
         //if (keyPressed.shiftKey) {
           // shift + enter for newline
           //const start = chatInput.selectionStart;
@@ -195,7 +198,7 @@
       const msgDiv = document.createElement("div");
       const timestamp = new Date(time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
       const infoSpan = document.createElement("span"); //trusted header
-      infoSpan.innerHTML = `<b>[${timestamp}] ${user}:</b>`;
+      infoSpan.innerHTML = `<b>[${timestamp}] ${user}:</b> `;
       const contentSpan = document.createElement("span"); //untrusted content
       contentSpan.textContent = content;
       msgDiv.appendChild(infoSpan); //assemble msg
