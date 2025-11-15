@@ -159,7 +159,6 @@
       if (chatInput.value.trim() === "") { //Handles empty lines
         return;
       }
-      
       let msgObj = {}
       msgObj["type"] = "message"
       msgObj["username"] = usernameConfirmed;
@@ -173,28 +172,34 @@
     
     //chatbox fct
     chatInput.addEventListener("keydown", (keyPressed) => {
-      if (keyPressed.key === "Enter") {
-        if (keyPressed.shiftKey) {
-          //shift + enter for newline
-          const start = chatInput.selectionStart;
-          const end = chatInput.selectionEnd;
-          chatInput.value = chatInput.value.substring(0, start) + "\n" + chatInput.value.substring(end);
-          chatInput.selectionStart = chatInput.selectionEnd = start + 1;
-          keyPressed.preventDefault();
-        } else {
-          //enter to send msg
+      if (keyPressed.key === "Enter") { //disabled newlines
+        //if (keyPressed.shiftKey) {
+          // shift + enter for newline
+          //const start = chatInput.selectionStart;
+          //const end = chatInput.selectionEnd;
+          //chatInput.value = chatInput.value.substring(0, start) + "\n" + chatInput.value.substring(end);
+          //chatInput.selectionStart = chatInput.selectionEnd = start + 1;
+          //keyPressed.preventDefault();
+        //} else {
+          // enter to send msg
           keyPressed.preventDefault();
           
           sendMsg()
-        }
+        //}
       }
     });
 
     function displayMessage(user, content, time) {
       const msgDiv = document.createElement("div");
       const timestamp = new Date(time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-      msgDiv.innerHTML = `<b>[${timestamp}] ${user}:</b> ${content}`;
-      messageBox.appendChild(msgDiv);
+      const infoSpan = document.createElement("span"); //trusted header
+      infoSpan.innerHTML = `<b>[${timestamp}] ${user}:</b>`;
+      const contentSpan = document.createElement("span"); //untrusted content
+      contentSpan.textContent = content;
+      msgDiv.appendChild(infoSpan); //assemble msg
+      msgDiv.appendChild(contentSpan);
+      
+      messageBox.appendChild(msgDiv); // put it in to the message box
       messageBox.scrollTop = messageBox.scrollHeight; // auto-scroll to bottom
 }
     
