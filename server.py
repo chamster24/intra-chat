@@ -27,7 +27,7 @@ async def websocket_endpoint(websocket: WebSocket, room: str):
                 try:
                      if not SAFE_USERNAME_PATTERN.match(msg["username"]):
                         print(f"SECURITY ALERT: Rejected unsafe username attempt: {msg["username"]}")
-                         await websocket.send_text(json.dumps({
+                        await websocket.send_text(json.dumps({
                             "type": "message",
                             "username": "*system",
                             "timestamp": datetime.now(timezone.utc).isoformat(timespec='milliseconds').replace('+00:00', 'Z'),
