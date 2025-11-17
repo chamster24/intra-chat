@@ -93,6 +93,7 @@ async def websocket_endpoint(websocket: WebSocket, room: str):
                             }))
                     except Exception:
                         pass
+                break
             else:
                 return
                 
