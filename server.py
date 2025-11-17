@@ -43,7 +43,7 @@ async def websocket_endpoint(websocket: WebSocket, room: str):
                 try:
                     if not SAFE_ROOMCODE_PATTERN.match(msg["room"]):
                         print(f"SECURITY ALERT: Rejected unsafe roomcode attempt: {msg["room"]}")
-                         await websocket.send_text(json.dumps({
+                        await websocket.send_text(json.dumps({
                             "type": "message",
                             "username": "*system",
                             "timestamp": datetime.now(timezone.utc).isoformat(timespec='milliseconds').replace('+00:00', 'Z'),
