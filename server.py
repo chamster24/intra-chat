@@ -12,13 +12,11 @@ connections = [] #temp connections list
 rooms = {}
 @app.websocket("/ws/{room}")
 
-
-SAFE_USERNAME_PATTERN = re.compile(r'^[a-zA-Z0-9_-]+$')
-SAFE_ROOMCODE_PATTERN = re.compile(r'^[a-zA-Z0-9]+$')
-
 async def websocket_endpoint(websocket: WebSocket, room: str):
     await websocket.accept()
     connections.append(websocket)
+    SAFE_USERNAME_PATTERN = re.compile(r'^[a-zA-Z0-9_-]+$')
+    SAFE_ROOMCODE_PATTERN = re.compile(r'^[a-zA-Z0-9]+$')
     try:
         while True:
             jsonMsg = await websocket.receive_text()
