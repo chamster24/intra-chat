@@ -186,3 +186,8 @@ async def websocket_endpoint(websocket: WebSocket, room: str):
 
 
 app.mount("/", StaticFiles(directory="static", html=True), name="static") #LAST PART FOR SERVING STATIC FILES
+
+@app.get("/keep-alive")
+async def keep_alive():
+    """Returns a simple 'ok' status for monitoring tools to prevent service sleep."""
+    return {"status": "awake"}
