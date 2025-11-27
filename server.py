@@ -184,7 +184,7 @@ async def websocket_endpoint(websocket: WebSocket, room: str):
         except Exception:
             pass
 
-@app.get("/keep-alive", methods=["GET", "HEAD"])
+@app.route("/keep-alive", methods=["GET", "HEAD"])
 async def keep_alive(): #keep alive
     return {"status": "awake"}
     
