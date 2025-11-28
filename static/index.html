@@ -30,6 +30,15 @@
     </label>
     <br><br>
     <button id="incognitoBtn">❌ Incognito Mode</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="loginBtn">Join Room</button>
+    
+    <footer>
+      <br>
+      <hr style="width: 90%; margin-left: auto; margin-right: auto; border: none; height: 5px; background-color: blue;">
+      <br>
+      <p style="text-align: center;">&copy; 2025 IntraChat. All rights reserved.   Version: <span id="version">UnknownVer</span></p>
+      <p style="text-align: center;"><a href="index.html">Main (Login) Page</a>  <a href="about.html">About</a>  <a href="termsofuse.html">Terms of Use</a>  <a href="privacypolicy.html">Privacy Policy</a></p>
+      <p style="text-align: center;"><a href="https://github.com/chamster24/intra-chat/">View Source (Github)</a>  <a href="https://stats.uptimerobot.com/FRtdhhA3pf">Site Status (Uptime Robot)</a>
+    </footer>
   </div>
 
   <!-- Chat Page -->
@@ -225,6 +234,39 @@
     }
 });
     
+  document.addEventListener('DOMContentLoaded', () => { //Version Management
+    const versionElement = document.getElementById('app-version');
+    try {
+      if (versionElement) {
+        versionElement.textContent = "Loading...";
+          // Fetch the version.txt file from the static asset path
+          fetch('static/version.txt')
+              .then(response => {
+                  // Check if the HTTP request was successful (status 200)
+                  if (!response.ok) {
+                      // If file not found (404), throw a controlled error
+                      throw new Error(`HTTP Error! Status: ${response.status}`);
+                  }
+                  return response.text();
+              })
+              .then(version => {
+          // Success: Update the element text
+                  versionElement.textContent = version.trim();
+              })
+              .catch(error => {
+                // Catch network errors, file not found errors, etc.
+                console.error("Failed to load application version:", error.message);
+                versionElement.textContent = "N/A"; // Display 'N/A' when it fails
+              });
+        }
+        } catch (globalError) {
+            // Catch any unexpected synchronous errors during script execution
+            console.error("A critical error occurred during version script execution:", globalError);
+            if (versionElement) {
+                versionElement.textContent = "Error";
+            }
+    }
+  });
   </script>
 </body>
 </html>
