@@ -1,4 +1,4 @@
-from fastapi import FastAPI, WebSocket
+from fastapi import FastAPI, WebSocket, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.websockets import WebSocketDisconnect
 import json
@@ -185,7 +185,7 @@ async def websocket_endpoint(websocket: WebSocket, room: str):
             pass
 
 @app.route("/keep-alive", methods=["GET", "HEAD"])
-async def keep_alive(): #keep alive
+async def keep_alive(request: Request): #keep alive
     return {"status": "awake"}
     
 app.mount("/", StaticFiles(directory="static", html=True), name="static") #LAST PART FOR SERVING STATIC FILES
