@@ -9,34 +9,28 @@
 
   <!-- Login Page -->
   <div id="loginPage" style="display: flex; height: 100vh; flex-direction: column; justify-content: center; align-items: center;">
-    <h1>IntrAChat</h1>
-    <p><br>Absolute anarchy, no moderation.</p>
-    <br>
+    <h1 style="color: black; margin: 0 0 10px 0; font-size: 2.5em; text-align: center;">IntrAChat</h1>
+    <p>Absolute anarchy, no moderation.</p>
     <h2>Login</h2>
     <input type="text" id="username" maxlength="16" placeholder="Enter your username (any username works!)">
-    <p style="text-align: center;"><br><i>Username should only contain letters, numbers, underscores(_), and hyphens (-).
+    <p style="text-align: center;"><i>Username should only contain letters, numbers, underscores(_), and hyphens (-).
       <br>Your username is NOT linked to any account of any kind, but the same username may not appear in 2 rooms at the same time.</i></p>
-    <br>
     <input type="text" id="roomCode" maxlength="10" placeholder="Enter your room code">
-    <p style="text-align: center;"><br><i>Room Code should only contain letters and numbers.
+    <p style="text-align: center;"><i>Room Code should only contain letters and numbers.
     <br>Your Room Code is NOT case sensitive. That means "ABCD" and "abcd" will lead you to the same room.</i></p>
-    <br><br>
     <label>
       <input type="checkbox" id="over13Chb" value="1"> I agree that I'm over 13.
     </label>
-    <br>
     <label>
-      <input type="checkbox" id="PPandTOUchb" value="1">I accept the <a href="termsofuse.html" target="_blank" rel="noopener noreferrer">terms of use</a> and privacy policy. <!-- add privacy policy -->
-    </label>
-    <br><br>
-    <button id="incognitoBtn">❌ Incognito Mode</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="loginBtn">Join Room</button>
+      <input type="checkbox" id="PPandTOUchb" value="1">I accept the <a href="termsofuse.html" target="_blank" rel="noopener noreferrer">terms of use</a> and <a href="privacypolicy.html" target="_blank" rel="noopener noreferrer">privacy policy</a>.
+  </label>
+    <br>
+    <button id="incognitoBtn">❌ Incognito Mode</button>&nbsp;<button id="loginBtn">Join Room</button>
     
     <footer>
-      <br>
       <hr style="width: 90%; margin-left: auto; margin-right: auto; border: none; height: 5px; background-color: blue;">
-      <br>
       <p style="text-align: center;">&copy; 2025 IntraChat. All rights reserved.   Version: <span id="version">UnknownVer</span></p>
-      <p style="text-align: center;"><a href="index.html">Main (Login) Page</a>  <a href="about.html">About</a>  <a href="termsofuse.html">Terms of Use</a>  <a href="privacypolicy.html">Privacy Policy</a></p>
+      <p style="text-align: center;"><a href="index.html" target="_blank" rel="noopener noreferrer">Main (Login) Page</a>  <a href="about.html" target="_blank" rel="noopener noreferrer">About</a>  <a href="termsofuse.html">Terms of Use</a>  <a href="privacypolicy.html">Privacy Policy</a></p>
       <p style="text-align: center;"><a href="https://github.com/chamster24/intra-chat/">View Source (Github)</a>  <a href="https://stats.uptimerobot.com/FRtdhhA3pf">Site Status (Uptime Robot)</a>
     </footer>
   </div>
