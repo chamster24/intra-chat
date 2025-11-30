@@ -189,3 +189,4 @@ async def keep_alive(request: Request): #keep alive
     return {"status": "awake"}
     
 app.mount("/", StaticFiles(directory="static", html=True), name="static") #LAST PART FOR SERVING STATIC FILES
+app.mount("/", StaticFiles(directory=".", html=True), name="root_static") #Mainly for version #
