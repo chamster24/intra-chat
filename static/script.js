@@ -41,14 +41,14 @@ incognitoBtn.addEventListener("click", () => { //maybe add icognito mode toggle 
       link.rel = "icon";
       document.head.appendChild(link);
     }
-    link.href = `/assets/favicon-i${rand}.png`;
+    link.href = `assets/favicon-i${rand}.png`;
     
   } else {
     incognitoMode = 0;
     document.title = "IntrAChat"
     incognitoBtn.textContent = "❌ Incognito Mode"
     let link = document.querySelector("link[rel~='icon']");
-    link.href = `/assets/favicon.png`;
+    link.href = `assets/favicon.png`;
   }
 });
 
