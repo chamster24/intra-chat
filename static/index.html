@@ -167,10 +167,7 @@
       }
       let msgObj = {}
       msgObj["type"] = "message"
-      msgObj["username"] = usernameConfirmed;
       msgObj["message"] = chatInput.value.trim();
-      msgObj["timestamp"] = new Date().toISOString();
-      msgObj["room"] = roomCodeConfirmed;
       socket.send(JSON.stringify(msgObj));
       console.log(JSON.stringify(msgObj));
       chatInput.value = ""
@@ -234,7 +231,7 @@
       if (versionElement) {
         versionElement.textContent = "Loading...";
           // Fetch the version.txt file from the static asset path
-          fetch('static/version.txt')
+          fetch('/version.txt')
               .then(response => {
                   // Check if the HTTP request was successful (status 200)
                   if (!response.ok) {
@@ -244,7 +241,6 @@
                   return response.text();
               })
               .then(version => {
-          // Success: Update the element text
                   versionElement.textContent = version.trim();
               })
               .catch(error => {
