@@ -1,3 +1,5 @@
+// Copyright 2025 chamster24   -   Licensed under the MIT License, see LICENSE file for details.
+
 const incognitoBtn = document.getElementById("incognitoBtn");
 const loginBtn = document.getElementById("loginBtn");
 const loginPage = document.getElementById("loginPage");
