@@ -1,3 +1,5 @@
+# Copyright 2025 chamster24   -   Licensed under the MIT License, see LICENSE file for details.
+
 from fastapi import FastAPI, WebSocket, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.websockets import WebSocketDisconnect
