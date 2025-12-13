@@ -1,4 +1,4 @@
-// Copyright 2025 chamster24   -   Licensed under the MIT License, see LICENSE file for details.
+// Copyright 2025 cHamster24   -   Licensed under the MIT License, see LICENSE file for details.
 
 const incognitoBtn = document.getElementById("incognitoBtn");
 const loginBtn = document.getElementById("loginBtn");
